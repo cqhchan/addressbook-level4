@@ -16,8 +16,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
-import seedu.address.logic.LoginLogic;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.XmlAddressBookStorage;
 
 /**
  * The manager of the UI component.
@@ -36,8 +37,6 @@ public class UiManager extends ComponentManager implements Ui {
     private static Config config;
     private static UserPrefs prefs;
     private static MainWindow mainWindow;
-    private LoginPage loginPage;
-    private LoginLogic loginLogic;
 
 
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
@@ -52,11 +51,6 @@ public class UiManager extends ComponentManager implements Ui {
     public void start(Stage primaryStage) {
 
         logger.info("Starting UI...");
-        Stage loginStage = new Stage();
-        loginStage.setTitle(config.getAppTitle());
-        loginPage = new LoginPage(loginStage, loginLogic);
-        logger.info("Login Created...");
-        loginPage.show();
         primaryStage.setTitle(config.getAppTitle());
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
@@ -69,22 +63,6 @@ public class UiManager extends ComponentManager implements Ui {
         }
 
     }
-
-
-    //    public static void startMainApp(Stage primaryStage) {
-    //        logger.info("Starting MainUI...");
-    //        primaryStage.setTitle(config.getAppTitle());
-    //        try {
-    //            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
-    //            mainWindow.show(); //This should be called before creating other UI parts
-    //            mainWindow.fillInnerParts();
-    //
-    //        } catch (Throwable e) {
-    //            logger.severe(StringUtil.getDetails(e));
-    //            logger.info("Fatal error during initializing" + e);
-    //        }
-    //
-    //    }
 
     @Override
     public void stop() {

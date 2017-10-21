@@ -93,4 +93,10 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    public void changeAddressBookPath(AddressBookStorage addressBookStorage){
+
+        this.addressBookStorage = addressBookStorage;
+
+    }
+
 }

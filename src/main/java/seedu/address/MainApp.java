@@ -50,7 +50,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    private Stage primarystage = new Stage();
 
     @Override
     public void init() throws Exception {
@@ -64,6 +64,7 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
+
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
@@ -74,6 +75,7 @@ public class MainApp extends Application {
 
         initEventsCenter();
     }
+
 
     private String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();

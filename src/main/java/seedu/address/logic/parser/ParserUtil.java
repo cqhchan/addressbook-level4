@@ -79,6 +79,7 @@ public class ParserUtil {
         return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
     }
 
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
