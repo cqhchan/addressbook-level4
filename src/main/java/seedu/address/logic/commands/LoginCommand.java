@@ -22,7 +22,7 @@ public class LoginCommand extends Command {
     public LoginCommand(String userName, String userPassword){
         if (userName.equals("chan") && userPassword.equals("123")){
             MESSAGE_LOGIN_ACKNOWLEDGEMENT = "Login Successful";
-            mainApp.StartUser(userName);
+            //mainApp.StartUser(userName);
 
 
         }
