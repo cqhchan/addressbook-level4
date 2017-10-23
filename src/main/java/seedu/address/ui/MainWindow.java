@@ -77,6 +77,7 @@ public class MainWindow extends UiPart<Region> {
         this.prefs = prefs;
 
         // Configure the UI
+
         setTitle(config.getAppTitle());
         setIcon(ICON);
         setWindowMinSize();
@@ -139,7 +140,7 @@ public class MainWindow extends UiPart<Region> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getCurrentAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);

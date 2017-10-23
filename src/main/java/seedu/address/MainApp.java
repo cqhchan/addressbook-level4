@@ -44,7 +44,7 @@ public class MainApp extends Application {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    protected Ui ui;
+    protected static Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
@@ -57,13 +57,11 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
 
-        config = initConfig(getApplicationParameter("config"));
-
+        config = initConfig(getApplicationParameter("Config"));
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
+        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath("address"));
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
 
         initLogging(config);
 
@@ -80,6 +78,11 @@ public class MainApp extends Application {
     private String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
+    }
+
+    public static Ui getui(){
+
+        return ui;
     }
 
     /**

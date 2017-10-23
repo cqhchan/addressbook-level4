@@ -6,6 +6,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.model.AddressBook;
+import seedu.address.ui.Ui;
 import sun.rmi.runtime.Log;
 
 import java.util.logging.Logger;
@@ -13,16 +14,18 @@ import java.util.logging.Logger;
 import static java.util.Objects.requireNonNull;
 
 public class LoginCommand extends Command {
-    public MainApp mainApp;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     public static final String COMMAND_WORD = "login";
-    private static String MESSAGE_LOGIN_ACKNOWLEDGEMENT = "Login";
+    private static String MESSAGE_LOGIN_ACKNOWLEDGEMENT = "Login Successful";
 
     public LoginCommand(String userName, String userPassword){
-        if (userName.equals("chan") && userPassword.equals("123")){
+        if (userName.equals("wong") && userPassword.equals("123")){
             MESSAGE_LOGIN_ACKNOWLEDGEMENT = "Login Successful";
-            //mainApp.StartUser(userName);
+
+
+            Ui ui = MainApp.getui();
+            ui.restart(userName);
 
 
         }
