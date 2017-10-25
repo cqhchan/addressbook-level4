@@ -169,7 +169,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public ObservableList<ReadOnlyReminder> getFilteredReminderList() {
-        logger.info("it came here");
 
         return FXCollections.unmodifiableObservableList(filteredReminders);
     }
