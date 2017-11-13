@@ -66,8 +66,8 @@ public class CommandTestUtil {
     public static final String USERNAME_DESC_USERNAME = " " + PREFIX_USERNAME + VALID_USERNAME_PRIVATE;
     public static final String PASSWORD_DESC_PASSWORD = " " + PREFIX_PASSWORD + VALID_PASSWORD_PASSWORD;
 
-    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "prate12";
-    public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "pasd123";
+    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "$@#^&";
+    public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + " ";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
