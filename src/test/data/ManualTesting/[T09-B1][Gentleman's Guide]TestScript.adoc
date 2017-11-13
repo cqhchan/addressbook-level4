@@ -22,9 +22,117 @@ Below are all the test cases for our product - Gentleman's Guide.
 
 === Create account
 
+*Positive Test cases:*
+
+`(Normal account Created)` +
+**Command:** +
+create u/jamesbond p/password +
+**Expected Message:** +
+New account added: jamesbond Password: password
+
+*Negative Test cases:*
+
+`(Missing Name)` +
+*Command:* +
+create p/password +
+*Expected Message:* +
+Invalid command format!
+create: Adds a Account to the database.
+Parameters: u/USERNAME p/PASSWORD
+
+`(Missing Password)` +
+*Command:* +
+create u/USERNAME +
+*Expected Message:* +
+Invalid command format!
+create: Adds a Account to the database.
+Parameters: u/USERNAME p/PASSWORD
+
+`(Invalid Username)` +
+*Command:* +
+create u/^&*( p/123 +
+*Expected Message:* +
+Username should only contain alphanumeric characters and spaces, and it should not be blank
+
+`(Invalid Username)` +
+*Command:* +
+create u/123 p/  +
+*Expected Message:* +
+Password can take any values, and it should not be blank
+
+`(More than one parameters missing)` +
+*Command:* +
+create +
+*Expected Message:* +
+Invalid command format!
+create: Adds a Account to the database.
+Parameters: u/USERNAME p/PASSWORD
+
+`(Duplicate Accounts)` +
+*Command:* +
+
+1. create u/gentleman p/girl +
+2. create u/gentleman p/g123 +
+
+*Expected Message:* +
+This account already exists in the address book +
+
 === Login to account
+*Positive Test cases:*
+
+`(Normal account Created)` +
+**Command:** +
+login u/private p/password +
+**Expected Message:** +
+Login Successful
+
+*Negative Test cases:*
+
+`(Missing Name)` +
+*Command:* +
+login p/password +
+*Expected Message:* +
+Invalid command format!
+login: Login to private Database.
+Parameters: u/USERNAME p/PASSWORD
+
+`(Missing Password)` +
+*Command:* +
+login u/USERNAME +
+*Expected Message:* +
+Invalid command format!
+login: Login to private Database.
+Parameters: u/USERNAME p/PASSWORD
+
+`(More than one parameters missing)` +
+*Command:* +
+login +
+*Expected Message:* +
+Invalid command format!
+login: Login to private Database.
+Parameters: u/USERNAME p/PASSWORD
+
+`(Incorrect Username)` +
+*Command:* +
+login u/private p/123 +
+*Expected Message:* +
+Username or Password Incorrect
+
+`(Incorrect Password)` +
+*Command:* +
+login u/prite p/password +
+*Expected Message:* +
+Username or Password Incorrect
 
 === Logout of account
+
+*Positive Test cases:*
+
+`(Logout)` +
+**Command:** +
+logout +
+**Expected Message:** +
+Logout as requested ...
 
 === Add person
 
@@ -106,7 +214,7 @@ Person emails should be 2 alphanumeric/period strings separated by '@' +
 This person already exists in the address book +
 
 === Birthday
-*Positive Test Case*
+*Success*
 
 `(Valid details)` +
 *Command:* +
@@ -120,7 +228,7 @@ birthday 1 +
 *Expected Message:* +
 Removed birthday from Person: ...
 
-*Negative Test Case*
+*Failure*
 
 `(Invalid date)` +
 *Command:* +
@@ -139,7 +247,7 @@ Example: birthday 1 b/02/03/1994 +
 
 === Edit person
 
-*Positive Test case*
+*Success*
 
 `(Valid name, phone, email, address, tag)` +
 *Command:* +
@@ -147,7 +255,7 @@ edit 1 n/tester10 p/87655678 e/johnny@example.com a/NUS t/enemies +
 *Expected Message:* +
 Edited Person: tester10 Phone: 87655678 Email: johnny@example.com Address: NUS Birthday: 01/01/1992 Tags: [enemies] +
 
-*Negative test cases*
+*Failure*
 
 `(Missing name, phone, email, address, tag with prefix)` +
 *Command:* +
@@ -192,7 +300,7 @@ The person index provided is invalid +
 
 === Delete person
 
-*Positive Test Case*
+*Success*
 
 `(Delete person successfully)` +
 *Command:* +
@@ -200,7 +308,7 @@ delete 1 +
 *Expected Message:* +
 Deleted Person: tester10 Phone: 87655678 Email: johnny@example.com Address: NUS Birthday: 01/01/1992 Tags: [enemies] +
 
-*Negative Test case*
+*Failure*
 
 `(Invalid Index: 0 or negative numbers)` +
 *Command:* +
@@ -217,7 +325,7 @@ delete 10000 +
 The person index provided is invalid +
 
 === Tag persons
-*Positive Test Case*
+*Success*
 
 `(Valid details)` +
 *Command:* +
@@ -232,7 +340,7 @@ tag 1,4 dummyTag +
 1 persons successfully tagged with [dummyTag]: +
 1 person(s) already have this tag: +
 
-*Negative Test Case*
+*Failure*
 
 `(Invalid indexes)` +
 *Command:* +
@@ -259,7 +367,7 @@ Parameters: INDEX,[MORE_INDEXES]... (must be positive integers) + TAGNAME +
 Example: tag 1,2,3 friends +
 
 === Untag persons
-*Positive Test Case*
+*Success*
 
 `(Valid details)` +
 *Command:* +
@@ -304,7 +412,7 @@ untag -all +
 *Expected Message:* +
 All tags in person list successfully removed.
 
-*Negative Test Case*
+*Failure*
 
 `(Tags not found)` +
 *Command:* +
@@ -358,7 +466,7 @@ Parameters: -all + TAGNAME +
 Example: untag -all friends/colleagues +
 
 === Retag persons
-*Positive Test Case*
+*Success*
 
 `(Valid details)` +
 *Command:* +
@@ -366,7 +474,7 @@ retag enemies friends +
 *Expected Message:* +
 [enemies] tag in person list successfully replaced by [friends]. +
 
-*Negative Test Case*
+*Failure*
 
 `(Tag not found)` +
 *Command:* +
@@ -390,7 +498,7 @@ Parameters: OLDTAGNAME + NEWTAGNAME +
 Example: retag friends enemies +
 
 === Retrieve persons
-*Positive Test Case*
+*Success*
 
 `(Valid details)` +
 *Command:* +
@@ -398,7 +506,7 @@ retrieve friends +
 *Expected Message:* +
 ... persons listed!
 
-*Negative Test Case*
+*Failure*
 
 `(Invalid tag name)` +
 *Command:* +
@@ -423,7 +531,7 @@ Parameters: TAGNAME +
 Example: retrieve friends
 
 === List persons
-*Positive Test Case*
+*Success*
 
 `(Valid details)` +
 *Command:* +
@@ -433,7 +541,7 @@ Listed all persons
 
 === Select person
 
-*Positive Test Case*
+*Success*
 
 `(Select person successfully)` +
 *Command:* +
@@ -443,7 +551,7 @@ Selected Person: 1
 
 === View person
 
-*Positive Test Case*
+*Success*
 
 `(View details of person)` +
 *Command:* +
@@ -453,7 +561,7 @@ Retrieved Profile of: testerX +
 
 === Add reminder
 
-*Positive Test Case*
+*Success*
 
 `(Valid details)` +
 *Command:* +
@@ -469,7 +577,7 @@ Priority can only be Low / Medium / High +
 
 === Edit reminder
 
-*Positive Test case*
+*Success*
 
 `(Valid task name, priority, date, message, tag)` +
 *Command:* +
@@ -477,7 +585,7 @@ editReminder 1 z/reminder19 p/High d/10/12/2017 15:00 m/tester t/testerTag
 *Expected Message:* +
 Edited Reminder: reminder19 Priority: High Date: 10/12/2017 15:00 Message: tester Tags: [testerTag]
 
-*Negative test cases*
+*Failure*
 
 `(Missing task name, priority, date with prefix)` +
 *Command:* +
@@ -522,7 +630,7 @@ The reminder index provided is invalid +
 
 === Delete reminder
 
-*Positive Test Case*
+*Success*
 
 `(Delete reminder successfully)` +
 *Command:* +
@@ -530,7 +638,7 @@ deleteReminder 1 +
 *Expected Message:* +
 Deleted Reminder: reminder1 submission Priority: Low Date: 25/12/2017 15:00 Message: Submit to manager Tags: [Work][John]
 
-*Negative Test case*
+*Failure*
 
 `(Invalid Index: 0 or negative numbers)` +
 *Command:* +
@@ -547,7 +655,7 @@ deleteReminder 10000 +
 The reminder index provided is invalid +
 
 === List reminders
-*Positive Test Case*
+*Success*
 
 `(Valid details)` +
 *Command:* +
@@ -556,7 +664,7 @@ Listed all reminders
 
 === Select reminders
 
-*Positive Test Case*
+*Success*
 
 `(Select reminder successfully)` +
 *Command:* +
@@ -566,7 +674,7 @@ Selected Reminder: 1
 
 === Find person by name
 
-*Positive Test Case*
+*Success*
 
 `(Valid person)` +
 *Command:* +
@@ -574,7 +682,7 @@ find John Doe +
 *Expected Message:* +
 1 persons listed!
 
-*Negative Test Case*
+*Failure*
 
 `(Invalid person)` +
 *Command:* +
@@ -584,7 +692,7 @@ find tester13 +
 
 === Find person by phone
 
-*Positive Test Case*
+*Success*
 
 `(Valid phone)` +
 *Command:* +
@@ -607,7 +715,7 @@ findPhone 0dsd00 +
 
 === Find person by email
 
-*Positive Test Case*
+*Success*
 
 `(Valid email)` +
 *Command:* +
@@ -629,14 +737,14 @@ findEmail aaaaaaaa +
 
 === Find reminder by task name
 
-*Positive Test case*
+*Success*
 `(Valid task name: case-insensitive)` +
 *Command:* +
 findReminder reminder1 +
 *Expected Message:* +
 x reminders listed! +
 
-*Negative Test case*
+*Failure*
 
 `(Valid reminder, but no reminder with this task name)` +
 *Command:* +
@@ -646,7 +754,7 @@ findReminder xxxxx +
 
 === Find reminder by priority
 
-*Positive Test case*
+*Success*
 
 `(Valid Priority: case-insensitive)` +
 *Command:* +
@@ -654,7 +762,7 @@ findPriority low +
 *Expected Message:* +
 x reminders with priorities(s) listed!
 
-*Negative Test case*
+*Failure*
 
 `(Invalid Priority)` +
 *Command:* +
@@ -664,7 +772,7 @@ findPriority Important +
 
 === Sort persons in alphabetical order
 
-*Positive Test case*
+*Success*
 
 `(sort normally)` +
 *Command:* +
@@ -687,7 +795,7 @@ Execute `undo` command twice to revert back to original list +
 
 === Sort persons by age
 
-*Positive Test case*
+*Success*
 
 `(sort age normally)` +
 *Command:* +
@@ -710,7 +818,7 @@ Execute `undo` command twice to revert back to original list +
 
 === Sort persons by birthday
 
-*Positive Test case*
+*Success*
 
 `(sort birthday normally)` +
 *Command:* +
@@ -733,7 +841,7 @@ Execute `undo` command twice to revert back to original list +
 
 === Sort reminders by priority
 
-*Positive Test case*
+*Success*
 
 `(sort reminder list normally)` +
 *Command:* +
@@ -750,6 +858,32 @@ All reminders are sorted by priority. (High -> Medium -> Low)
 
 *Expected Message:* +
 Reminder list is empty.
+
+=== View the help Window
+
+*Success*
+
+`(View help Window)` +
+*Command:* +
+help +
+*Expected Output* +
+Help Window open
+
+=== View Command History
+
+*Success*
+
+`(View Command History)` +
+*Command:* +
+history +
+*Expected Output* +
+Shows all commands used
+
+=== Undo/Redo Command
+
+Use undo/redo to undo/redo last command.
+
+
 
 [NOTE]
 Execute `undo` command twice to revert back to original list +
