@@ -22,7 +22,7 @@ Below are all the test cases for our product - Gentleman's Guide.
 
 === Create account
 
-*Positive Test cases:*
+*Success*
 
 `(Normal account Created)` +
 **Command:** +
@@ -30,7 +30,7 @@ create u/jamesbond p/password +
 **Expected Message:** +
 New account added: jamesbond Password: password
 
-*Negative Test cases:*
+*Failure*
 
 `(Missing Name)` +
 *Command:* +
@@ -78,7 +78,7 @@ Parameters: u/USERNAME p/PASSWORD
 This account already exists in the address book +
 
 === Login to account
-*Positive Test cases:*
+*Success*
 
 `(Normal account Created)` +
 **Command:** +
@@ -86,7 +86,7 @@ login u/private p/password +
 **Expected Message:** +
 Login Successful
 
-*Negative Test cases:*
+*Failure*
 
 `(Missing Name)` +
 *Command:* +
@@ -126,7 +126,7 @@ Username or Password Incorrect
 
 === Logout of account
 
-*Positive Test cases:*
+*Success*
 
 `(Logout)` +
 **Command:** +
@@ -136,21 +136,21 @@ Logout as requested ...
 
 === Add person
 
-*Positive Test cases:*
+*Success*
 
 `(Normal person added)` +
 **Command:** +
-add n/tester1 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney +
+add n/Cloud Strife p/12457809 e/cloud@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney +
 **Expected Message:** +
-New person added: tester1 Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25 Birthday:  Tags: [owesMoney][friends] +
+New person added: Cloud Strife Phone: 12457809 Email: cloud@example.com Address: 311, Clementi Ave 2, #02-25 Birthday:  Tags: [owesMoney][friends] +
 
 `(Tags are not compulsory)` +
 *Command:* +
-add n/tester2 p/98765422 e/jamie@example.com a/311, Clementi Ave 2, #02-26 +
+add n/Yukari Takeba p/98765422 e/jamie@example.com a/311, Clementi Ave 2, #02-26 +
 *Expected Message:* +
-New person added: tester2 Phone: 98765422 Email: jamie@example.com Address: 311, Clementi Ave 2, #02-26 Birthday:  Tags:  +
+New person added: Yukari Takeba Phone: 98765422 Email: jamie@example.com Address: 311, Clementi Ave 2, #02-26 Birthday:  Tags:  +
 
-*Negative Test cases:*
+*Failure*
 
 `(Missing Name)` +
 *Command:* +
@@ -218,21 +218,21 @@ This person already exists in the address book +
 
 `(Valid details)` +
 *Command:* +
-birthday 1 10/13/2017 +
+birthday 1 b/10/11/2017 +
 *Expected Message:* +
-Added birthday to Person: ...
+Added birthday to Person: Alex Yeoh Phone: 87438807 Email: alexyeoh@example.com Address: Blk 30 Geylang Street 29, #06-40 Birthday: 10/11/2017 Tags: [All][enemies][friends]
 
 `(Empty birthday)` +
 *Command:* +
 birthday 1 +
 *Expected Message:* +
-Removed birthday from Person: ...
+Removed birthday from Person: Alex Yeoh Phone: 87438807 Email: alexyeoh@example.com Address: Blk 30 Geylang Street 29, #06-40 Birthday:  Tags: [All][enemies][friends]
 
 *Failure*
 
 `(Invalid date)` +
 *Command:* +
-birthday 1 35/13/2017 +
+birthday 1 b/35/13/2017 +
 *Expected Message:* +
 Person birthdays must be either a valid date, of format DD/MM/YYYY or empty
 
@@ -251,9 +251,9 @@ Example: birthday 1 b/02/03/1994 +
 
 `(Valid name, phone, email, address, tag)` +
 *Command:* +
-edit 1 n/tester10 p/87655678 e/johnny@example.com a/NUS t/enemies +
+edit 1 n/Brian Simba p/87655678 e/johnny@example.com a/NUS t/enemies +
 *Expected Message:* +
-Edited Person: tester10 Phone: 87655678 Email: johnny@example.com Address: NUS Birthday: 01/01/1992 Tags: [enemies] +
+Edited Person: Brian Simba Phone: 87655678 Email: johnny@example.com Address: NUS Birthday:  Tags: [enemies] +
 
 *Failure*
 
@@ -277,16 +277,16 @@ Person emails should be 2 alphanumeric/period strings separated by '@' +
 
 `(Edit to become duplicate persons)` +
 *Command:* +
-1. add n/tester11 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney +
-2. add n/tester12 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney +
-3. edit "index of tester11" n/tester12
+1. add n/Brian Simba p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney +
+2. add n/Danijela Laleh p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney +
+3. edit "index of Brian Simba" n/Danijela Laleh
 
 *Expected Message:* +
 This person already exists in the address book +
 
 `(Invalid Index: 0 or negative numbers)` +
 *Command:* +
-edit 0 n/tester1 +
+edit 0 n/Cloud Strife +
 *Expected Message:* +
 Invalid command format!
 edit: Edits the details of the person identified by the index number used in the last person listing. Existing values will be overwritten by the input values.
@@ -294,7 +294,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/A
 
 `(Invalid Index: More than number of persons in the list)` +
 *Command:* +
-edit 10000 n/tester1 +
+edit 10000 n/Cloud Strife +
 *Expected Message:* +
 The person index provided is invalid +
 
@@ -306,7 +306,7 @@ The person index provided is invalid +
 *Command:* +
 delete 1 +
 *Expected Message:* +
-Deleted Person: tester10 Phone: 87655678 Email: johnny@example.com Address: NUS Birthday: 01/01/1992 Tags: [enemies] +
+Deleted Person: Brian Simba Phone: 87655678 Email: johnny@example.com Address: NUS Birthday:  Tags: [enemies] +
 
 *Failure*
 
@@ -331,14 +331,14 @@ The person index provided is invalid +
 *Command:* +
 tag 1,2,3 dummyTag +
 *Expected Message:* +
-3 persons successfully tagged with [dummyTag]: ...
+3 persons successfully tagged with [dummyTag]: Bernice Yu, Charlotte Oliveiro, David Li
 
 `(Valid details)` +
 *Command:* +
 tag 1,4 dummyTag +
 *Expected Message:* +
-1 persons successfully tagged with [dummyTag]: +
-1 person(s) already have this tag: +
+1 persons successfully tagged with [dummyTag]: Irfan Ibrahim +
+1 person(s) already have this tag: Bernice Yu
 
 *Failure*
 
@@ -373,14 +373,8 @@ Example: tag 1,2,3 friends +
 *Command:* +
 untag 1,2,3 friends/enemies +
 *Expected Message:* +
-3 person(s) successfully untagged from [enemies], [friends]: ...
-
-`(Valid details)` +
-*Command:* +
-untag 1,2,3 friends/randomTag +
-*Expected Message:* +
-2 person(s) successfully untagged from [randomTag], [friends]: ...
-1 person(s) do not have any of the specified tags:...
+2 person(s) successfully untagged from [enemies], [friends]: Bernice Yu, Charlotte Oliveiro +
+1 person(s) do not have any of the specified tags: David Li
 
 `(Valid details)` +
 *Command:* +
@@ -390,27 +384,17 @@ untag -all friends/enemies +
 
 `(Valid details)` +
 *Command:* +
-untag -all friends/randomTag +
-*Expected Message:* +
-[randomTag], [friends] tag(s) successfully removed from person list.
-
-`(Valid details)` +
-*Command:* +
 untag 1,2,3 +
 *Expected Message:* +
-3 person(s) sucessfully untagged: ...
-
-`(Valid details)` +
-*Command:* +
-untag 1,2,3 +
-*Expected Message:* +
-3 person(s) sucessfully untagged: ...
+3 person(s) sucessfully untagged: Bernice Yu, Charlotte Oliveiro, David Li
 
 `(Valid details)` +
 *Command:* +
 untag -all +
+undo +
 *Expected Message:* +
 All tags in person list successfully removed.
+Undo success!
 
 *Failure*
 
@@ -470,9 +454,9 @@ Example: untag -all friends/colleagues +
 
 `(Valid details)` +
 *Command:* +
-retag enemies friends +
+retag All friends +
 *Expected Message:* +
-[enemies] tag in person list successfully replaced by [friends]. +
+[All] tag in person list successfully replaced by [friends]. +
 
 *Failure*
 
@@ -504,7 +488,7 @@ Example: retag friends enemies +
 *Command:* +
 retrieve friends +
 *Expected Message:* +
-... persons listed!
+16 persons listed!
 
 *Failure*
 
@@ -567,7 +551,7 @@ Retrieved Profile of: testerX +
 *Command:* +
 addReminder z/reminder1 submission p/Low d/25/12/2017 15:00 m/Submit to manager t/Work t/John +
 *Expected Message:* +
-New reminder added: reminder1 Priority: Low Date: 25/12/2017 15:00 Message: Submit to manager Tags: [Work][John] +
+New reminder added: reminder1 submission Priority: Low Date: 25/12/2017 15:00 Message: Submit to manager Tags: [Work][John] +
 
 `(Invalid priority)` +
 *Command:* +
@@ -607,8 +591,8 @@ Date should conform the following format: dd/mm/yyyy hh:mm +
 
 `(Edit to become duplicate reminders)` +
 *Command:* +
-1. add z/reminder5 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney +
-2. add z/tester6 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney +
+1. addReminder z/reminder5 p/Low d/12/12/2017 15:00 m/test t/friends t/owesMoney +
+2. addReminder z/reminder6 p/Low d/12/12/2017 15:00 m/test t/friends t/owesMoney +
 3. editReminder "index of reminder5" z/reminder6
 
 *Expected Message:* +
@@ -636,7 +620,7 @@ The reminder index provided is invalid +
 *Command:* +
 deleteReminder 1 +
 *Expected Message:* +
-Deleted Reminder: reminder1 submission Priority: Low Date: 25/12/2017 15:00 Message: Submit to manager Tags: [Work][John]
+Deleted Reminder: reminder19 Priority: High Date: 10/12/2017 15:00 Message: tester Tags: [testerTag]
 
 *Failure*
 
@@ -686,7 +670,7 @@ find John Doe +
 
 `(Invalid person)` +
 *Command:* +
-find tester13 +
+find Random Name +
 *Expected Message:* +
 0 persons listed!
 
@@ -742,7 +726,7 @@ findEmail aaaaaaaa +
 *Command:* +
 findReminder reminder1 +
 *Expected Message:* +
-x reminders listed! +
+1 reminders listed! +
 
 *Failure*
 
@@ -760,7 +744,7 @@ findReminder xxxxx +
 *Command:* +
 findPriority low +
 *Expected Message:* +
-x reminders with priorities(s) listed!
+10 reminders with priorities(s) listed!
 
 *Failure*
 
@@ -779,6 +763,9 @@ findPriority Important +
 sort +
 *Expected Message:* +
 All contacts are sorted.
+
+[NOTE]
+Execute `undo` command to revert back to original list +
 
 `(sort with empty contacts)` +
 *Command:* +
@@ -803,6 +790,9 @@ sortAge +
 *Expected Message:* +
 All contacts are sorted by age. (Oldest To Youngest)
 
+[NOTE]
+Execute `undo` command to revert back to original list +
+
 `(sort age with empty contacts)` +
 *Command:* +
 
@@ -826,6 +816,9 @@ sortBirthday +
 *Expected Message:* +
 All contacts are sorted by birthday.
 
+[NOTE]
+Execute `undo` command to revert back to original list +
+
 `(sort birthday with empty contacts)` +
 *Command:* +
 
@@ -848,6 +841,9 @@ Execute `undo` command twice to revert back to original list +
 sortPriority +
 *Expected Message:* +
 All reminders are sorted by priority. (High -> Medium -> Low)
+
+[NOTE]
+Execute `undo` command to revert back to original list +
 
 `(sort reminder list with no reminders)` +
 *Command:* +
@@ -883,8 +879,4 @@ Shows all commands used
 
 Use undo/redo to undo/redo last command.
 
-
-
-[NOTE]
-Execute `undo` command twice to revert back to original list +
 
